@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Appointment with Principal</title>
+</head>
+<body>
+  <h2>Book an Appointment with the Principal</h2>
+  <form id="appointment-form">
+    <label for="name">Your Name:</label><br />
+    <input type="text" id="name" name="from_name" required /><br /><br />
+
+    <label for="email">Your Email:</label><br />
+    <input type="email" id="email" name="from_email" required /><br /><br />
+
+    <label for="date">Preferred Date:</label><br />
+    <input type="date" id="date" name="appointment_date" required /><br /><br />
+
+    <label for="reason">Reason for Appointment:</label><br />
+    <textarea id="reason" name="message" required></textarea><br /><br />
+
+    <button type="submit">Send Request</button>
+  </form>
+
+  <!-- EmailJS script -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Your script runs after EmailJS is fully loaded -->
+  <script>
+    window.addEventListener('load', function () {
+      emailjs.init('s_UQhhz7pXMFLG7fX'); // Initialize EmailJS
+
+      const form = document.getElementById('appointment-form');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        emailjs.sendForm('service_gl77pcp', 'template_ujo1avs', this)
+          .then(function () {
+            alert('Appointment request sent successfully!');
+            form.reset(); // optional: reset form
+          }, function (error) {
+            alert('Failed to send appointment request. Please try again.');
+            console.error('Error:', error);
+          });
+      });
+    });
+  </script>
+</body>
+</html>
