@@ -1,155 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Book Appointment with Principal</title>
-  <style>
-    :root {
-      --primary-color: #1e90ff;
-      --background-color: #f9f9f9;
-      --form-background: #ffffff;
-      --input-border: #ccc;
-      --input-focus: var(--primary-color);
-      --text-color: #333;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-family);
-      background-color: var(--background-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .form-container {
-      background-color: var(--form-background);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .form-container h2 {
-      margin-bottom: 1.5rem;
-      color: var(--text-color);
-      text-align: center;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--text-color);
-      font-weight: 500;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid var(--input-border);
-      border-radius: 4px;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--input-focus);
-      outline: none;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .submit-button {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: var(--primary-color);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .submit-button:hover {
-      background-color: darken(var(--primary-color), 10%);
-    }
-
-    @media (max-width: 500px) {
-      .form-container {
-        padding: 1.5rem;
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Appointment with Principal</title>
+    <style>
+      :root {
+        --primary-color: #1e90ff;
+        --background-gradient: linear-gradient(135deg, #cce5ff, #e6f0ff);
+        --form-background: #ffffff;
+        --input-border: #ccc;
+        --input-focus: var(--primary-color);
+        --text-color: #333;
+        --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="form-container">
-    <h2>Book an Appointment with the Principal</h2>
-    <form id="appointment-form">
-      <div class="form-group">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="from_name" required />
-      </div>
-      <div class="form-group">
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="from_email" required />
-      </div>
-      <div class="form-group">
-        <label for="phone">Your Phone Number:</label>
-        <input type="tel" id="phone" name="phone_number" pattern="[0-9]{10}" placeholder="e.g. 9876543210" required />
-      </div>
-      <div class="form-group">
-        <label for="date">Preferred Date:</label>
-        <input type="date" id="date" name="appointment_date" required />
-      </div>
-      <div class="form-group">
-        <label for="reason">Reason for Appointment:</label>
-        <textarea id="reason" name="message" required></textarea>
-      </div>
-      <button type="submit" class="submit-button">Send Request</button>
-    </form>
-  </div>
 
-  <!-- EmailJS script -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+      * {
+        box-sizing: border-box;
+      }
 
-  <!-- Your script runs after EmailJS is fully loaded -->
-  <script>
-    window.addEventListener('load', function () {
-      emailjs.init('s_UQhhz7pXMFLG7fX'); // Initialize EmailJS
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-family);
+        background: var(--background-gradient);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
 
-      const form = document.getElementById('appointment-form');
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+      .form-container {
+        background-color: var(--form-background);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        backdrop-filter: blur(6px);
+        transition: transform 0.3s ease;
+      }
 
-        emailjs.sendForm('service_gl77pcp', 'template_ujo1avs', this)
-          .then(function () {
-            alert('Appointment request sent successfully!');
-            form.reset(); // optional: reset form
-          }, function (error) {
-            alert('Failed to send appointment request. Please try again.');
-            console.error('Error:', error);
-          });
+      .form-container:hover {
+        transform: translateY(-4px);
+      }
+
+      .form-container h2 {
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--input-border);
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--input-focus);
+        outline: none;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .submit-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-button:hover {
+        background-color: #187bcd;
+      }
+
+      @media (max-width: 500px) {
+        .form-container {
+          padding: 1.5rem;
+        }
+      }
+
+      .form-group.confirmation {
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        color: var(--text-color);
+      }
+
+      .form-group.confirmation input[type="checkbox"] {
+        margin-right: 0.5rem;
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Book an Appointment with the Principal</h2>
+      <form id="appointment-form">
+        <div class="form-group">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" name="from_name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="from_email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Your Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone_number"
+            pattern="[0-9]{10}"
+            placeholder="e.g. 9876543210"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">Preferred Date:</label>
+          <input type="date" id="date" name="appointment_date" required />
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason for Appointment:</label>
+          <textarea id="reason" name="message" required></textarea>
+        </div>
+        <div class="form-group confirmation">
+          <label>
+            <input type="checkbox" id="confirm" required />
+            I understand that this is only an appointment request and will be
+            scheduled only after a confirmation call from the school.
+          </label>
+        </div>
+
+        <button type="submit" class="submit-button">Send Request</button>
+      </form>
+    </div>
+
+    <!-- EmailJS script -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Your script runs after EmailJS is fully loaded -->
+    <script>
+      window.addEventListener("load", function () {
+        emailjs.init("s_UQhhz7pXMFLG7fX"); // Initialize EmailJS
+
+        const form = document.getElementById("appointment-form");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          emailjs.sendForm("service_gl77pcp", "template_ujo1avs", this).then(
+            function () {
+              alert("Appointment request sent successfully!");
+              form.reset(); // optional: reset form
+            },
+            function (error) {
+              alert("Failed to send appointment request. Please try again.");
+              console.error("Error:", error);
+            }
+          );
+        });
       });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-
