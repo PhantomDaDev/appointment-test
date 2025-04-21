@@ -4,102 +4,124 @@
   <meta charset="UTF-8" />
   <title>Book Appointment with Principal</title>
   <style>
+    :root {
+      --primary-color: #1e90ff;
+      --background-color: #f9f9f9;
+      --form-background: #ffffff;
+      --input-border: #ccc;
+      --input-focus: var(--primary-color);
+      --text-color: #333;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f8fb;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      background-color: var(--background-color);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
     }
 
-    form {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    .form-container {
+      background-color: var(--form-background);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 400px;
     }
 
-    h2 {
+    .form-container h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
       text-align: center;
-      color: #333;
-      margin-bottom: 20px;
     }
 
-    label {
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
       display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #444;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+      font-weight: 500;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    textarea {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
+      padding: 0.75rem;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      font-size: 1rem;
       transition: border-color 0.3s;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: #007bff;
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--input-focus);
       outline: none;
     }
 
-    textarea {
+    .form-group textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 100px;
     }
 
-    button {
+    .submit-button {
       width: 100%;
-      background-color: #007bff;
-      color: white;
-      padding: 12px;
+      padding: 0.75rem;
+      background-color: var(--primary-color);
+      color: #fff;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 4px;
+      font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s;
     }
 
-    button:hover {
-      background-color: #0056b3;
+    .submit-button:hover {
+      background-color: darken(var(--primary-color), 10%);
     }
 
     @media (max-width: 500px) {
-      form {
-        padding: 20px;
+      .form-container {
+        padding: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <form id="appointment-form">
+  <div class="form-container">
     <h2>Book an Appointment with the Principal</h2>
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="from_name" required />
-
-    <label for="email">Your Email:</label>
-    <input type="email" id="email" name="from_email" required />
-
-    <label for="date">Preferred Date:</label>
-    <input type="date" id="date" name="appointment_date" required />
-
-    <label for="reason">Reason for Appointment:</label>
-    <textarea id="reason" name="message" required></textarea>
-
-    <button type="submit">Send Request</button>
-  </form>
+    <form id="appointment-form">
+      <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="from_name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="from_email" required />
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" name="appointment_date" required />
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason for Appointment:</label>
+        <textarea id="reason" name="message" required></textarea>
+      </div>
+      <button type="submit" class="submit-button">Send Request</button>
+    </form>
+  </div>
 
   <!-- EmailJS script -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
