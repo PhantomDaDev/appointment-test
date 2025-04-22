@@ -179,7 +179,7 @@
       <h2>Book an Appointment</h2>
       <form id="appointment-form">
         <div class="form-group">
-          <label for="who-to-meet">Who do you want to meet?</label>
+          <label for="who-to-meet">Whom do you want to meet?</label>
           <select id="who-to-meet" name="who_to_meet" required>
             <option value="" disabled selected>Select an option</option>
             <option value="Principal">Principal</option>
@@ -209,14 +209,8 @@
         </div>
         <div class="form-group">
           <label for="phone">Your Phone Number:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone_number"
-            pattern="[0-9]{10}"
-            placeholder="e.g. +971 00 0000 000"
-            required
-          />
+          <input type="tel" id="phone" name="phone_number" pattern="[0-9]{10}
+          required />
         </div>
         <div class="form-group">
           <label for="date">Preferred Date:</label>
@@ -243,6 +237,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script>
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(email)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        emailjs.sendForm("service_gl77pcp", "template_ujo1avs", this).then(
+          function () {
+            alert("Appointment request sent successfully!");
+            form.reset();
+          },
+          function (error) {
+            alert("Failed to send appointment request. Please try again.");
+            console.error("Error:", error);
+          }
+        );
+      });
+
       document
         .getElementById("who-to-meet")
         .addEventListener("change", function () {
@@ -279,4 +296,5 @@
     </script>
   </body>
 </html>
+
 
