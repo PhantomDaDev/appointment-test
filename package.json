@@ -10,8 +10,7 @@
     "nodemailer": "^6.7.2",
     "vite": "^4.0.0"
   },
-  "devDependencies": {},
   "engines": {
-    "node": "16.x"
+    "node": "22.x"
   }
 }
