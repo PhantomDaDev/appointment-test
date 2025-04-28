@@ -116,36 +116,25 @@
       teacherGroup.style.display = this.value === "Teacher" ? "block" : "none";
     });
 
-    const form = document.getElementById('appointment-form');
+    document.getElementById("appointment-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const appointmentData = {
-        from_name: document.getElementById('from_name').value,
-        from_email: document.getElementById('from_email').value,
-        phone_number: document.getElementById('phone_number').value,
-        appointment_date: document.getElementById('appointment_date').value,
-        who_to_meet: document.getElementById('who_to_meet').value,
-        teacher_name: document.getElementById('teacher_name').value,
-        message: document.getElementById('message').value,
-      };
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch('http://localhost:3000/send-email', {
+        const response = await fetch('/api/send-email', {
           method: 'POST',
+          body: JSON.stringify(data),
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(appointmentData),
         });
 
         const result = await response.json();
         alert(result.message);
-        form.reset();
       } catch (error) {
-        console.error('Error sending appointment:', error);
-        alert('Failed to send appointment.');
+        alert('Error submitting appointment request!');
       }
     });
   </script>
